@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// SQLite não suporta enums nativos, então os campos de status usam
+// String e as opções válidas são controladas pelo TypeScript (src/lib/types.ts).
+// Ao migrar para Postgres (Neon) no deploy, essas colunas podem virar enums de verdade.
+
+model Usuario {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String   @unique
+  senhaHash String
+  papel     String   @default("TERAPEUTA")
+  pacientes Paciente[]
+  createdAt DateTime @default(now())
+}
+
+model Paciente {
+  id           String   @id @default(cuid())
+  nome         String
+  contato      String?
+  status       String   @default("ATIVO")
+  observacoes  String?
+  valorSessao  Float?
+  terapeutaId  String
+  terapeuta    Usuario  @relation(fields: [terapeutaId], references: [id], onDelete: Cascade)
+  sessoes      Sessao[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Sessao {
+  id          String      @id @default(cuid())
+  pacienteId  String
+  paciente    Paciente    @relation(fields: [pacienteId], references: [id], onDelete: Cascade)
+  dataHora    DateTime
+  status      String      @default("AGENDADA")
+  recorrencia String      @default("NENHUMA")
+  nota        NotaSessao?
+  pagamento   Pagamento?
+  createdAt   DateTime    @default(now())
+
+  @@index([dataHora])
+}
+
+model NotaSessao {
+  id        String   @id @default(cuid())
+  sessaoId  String   @unique
+  sessao    Sessao   @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  texto     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pagamento {
+  id            String    @id @default(cuid())
+  sessaoId      String    @unique
+  sessao        Sessao    @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  valor         Float
+  status        String    @default("PENDENTE")
+  dataPagamento DateTime?
+  createdAt     DateTime  @default(now())
+}
