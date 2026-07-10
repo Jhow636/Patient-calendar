@@ -47,3 +47,6 @@ next-env.d.ts
 /dev.db
 *.db
 *.db-journal
+
+# configurações locais do Claude Code (específicas de cada máquina)
+.claude/settings.local.json

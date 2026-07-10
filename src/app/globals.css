@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: #efebe3;
+  --color-paper-raised: #f7f4ec;
+  --color-ink: #1f2a24;
+  --color-ink-soft: #59645c;
+  --color-primary: #3b5346;
+  --color-primary-soft: #6b8574;
+  --color-accent: #a9702f;
+  --color-line: #d9d2c2;
+  --color-success: #2f7d5c;
+  --color-success-bg: #2f7d5c1a;
+  --color-warning: #b8862b;
+  --color-warning-bg: #b8862b1a;
+  --color-danger: #b3492f;
+  --color-danger-bg: #b3492f1a;
+  --color-info: #3a6ea5;
+  --color-info-bg: #3a6ea51a;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-paper: #14120d;
+    --color-paper-raised: #1c1a14;
+    --color-ink: #e9e4d8;
+    --color-ink-soft: #a79f8d;
+    --color-primary: #8fb39d;
+    --color-primary-soft: #6d9583;
+    --color-accent: #d9a257;
+    --color-line: #322d24;
+    --color-success: #7fbfa0;
+    --color-success-bg: #7fbfa026;
+    --color-warning: #e0b877;
+    --color-warning-bg: #e0b87726;
+    --color-danger: #e0876c;
+    --color-danger-bg: #e0876c26;
+    --color-info: #85b0dd;
+    --color-info-bg: #85b0dd26;
   }
 }
 
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-raised: var(--color-paper-raised);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-primary: var(--color-primary);
+  --color-primary-soft: var(--color-primary-soft);
+  --color-accent: var(--color-accent);
+  --color-line: var(--color-line);
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-warning: var(--color-warning);
+  --color-warning-bg: var(--color-warning-bg);
+  --color-danger: var(--color-danger);
+  --color-danger-bg: var(--color-danger-bg);
+  --color-info: var(--color-info);
+  --color-info-bg: var(--color-info-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
