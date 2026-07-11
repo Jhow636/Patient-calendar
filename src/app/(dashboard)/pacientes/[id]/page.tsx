@@ -132,6 +132,20 @@ export default async function PacienteDetalhePage({
             />
           </div>
 
+          <div className="space-y-1.5">
+            <label htmlFor="prontuario" className="text-sm font-medium text-ink">
+              Prontuário
+            </label>
+            <textarea
+              id="prontuario"
+              name="prontuario"
+              rows={6}
+              placeholder="Histórico clínico do paciente, diagnósticos, tratamentos anteriores..."
+              defaultValue={paciente.prontuario ?? ""}
+              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
           <SubmitButton className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90">
             Salvar alterações
           </SubmitButton>
