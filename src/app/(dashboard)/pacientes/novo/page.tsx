@@ -31,12 +31,12 @@ export default function NovoPacientePage() {
 
         <div className="space-y-1.5">
           <label htmlFor="contato" className="text-sm font-medium text-ink">
-            Contato
+            Telefone ou E-mail
           </label>
           <input
             id="contato"
             name="contato"
-            placeholder="E-mail ou telefone"
+            placeholder="(11) 98888-1234 ou email@exemplo.com"
             className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
