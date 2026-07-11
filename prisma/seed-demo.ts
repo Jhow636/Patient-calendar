@@ -31,7 +31,7 @@ async function main() {
   const joao = await prisma.paciente.create({
     data: {
       nome: "João Pereira",
-      contato: "(11) 98888-1234",
+      telefone: "(11) 98888-1234",
       valorSessao: 180,
       observacoes: "Processo focado em transição de carreira e autoconfiança.",
       terapeutaId: terapeuta.id,
@@ -40,7 +40,7 @@ async function main() {
   const ana = await prisma.paciente.create({
     data: {
       nome: "Ana Costa",
-      contato: "ana.costa@email.com",
+      email: "ana.costa@email.com",
       valorSessao: 150,
       observacoes: "Acompanhamento semanal desde março.",
       terapeutaId: terapeuta.id,
@@ -49,7 +49,7 @@ async function main() {
   const carlos = await prisma.paciente.create({
     data: {
       nome: "Carlos Mendes",
-      contato: "(21) 97777-5678",
+      telefone: "(21) 97777-5678",
       valorSessao: 200,
       terapeutaId: terapeuta.id,
     },
@@ -58,6 +58,7 @@ async function main() {
   await prisma.paciente.updateMany({
     where: { nome: "Maria Silva" },
     data: {
+      email: "maria@exemplo.com",
       observacoes: "Trabalho voltado a ansiedade e limites no ambiente de trabalho.",
     },
   });

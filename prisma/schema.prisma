@@ -27,7 +27,8 @@ model Usuario {
 model Paciente {
   id           String   @id @default(cuid())
   nome         String
-  contato      String?
+  email        String?
+  telefone     String?
   status       String   @default("ATIVO")
   observacoes  String?
   valorSessao  Float?

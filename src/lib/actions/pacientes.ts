@@ -8,7 +8,12 @@ import { requireUsuario } from "@/lib/auth-helpers";
 
 const pacienteSchema = z.object({
   nome: z.string().trim().min(1, "Informe o nome"),
-  contato: z
+  email: z
+    .string()
+    .trim()
+    .optional()
+    .transform((v) => (v ? v : null)),
+  telefone: z
     .string()
     .trim()
     .optional()
@@ -24,7 +29,8 @@ const pacienteSchema = z.object({
 function lerFormulario(formData: FormData) {
   return pacienteSchema.parse({
     nome: formData.get("nome"),
-    contato: formData.get("contato"),
+    email: formData.get("email"),
+    telefone: formData.get("telefone"),
     observacoes: formData.get("observacoes"),
     valorSessao: formData.get("valorSessao") || null,
   });

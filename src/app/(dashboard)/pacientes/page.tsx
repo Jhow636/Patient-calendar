@@ -61,7 +61,7 @@ export default async function PacientesPage() {
                     <p className="truncate font-medium text-ink">{paciente.nome}</p>
                     <p className="truncate text-sm text-ink-soft">
                       {[
-                        paciente.contato,
+                        [paciente.email, paciente.telefone].filter(Boolean).join(" / "),
                         paciente.valorSessao != null
                           ? formatMoeda(paciente.valorSessao)
                           : null,

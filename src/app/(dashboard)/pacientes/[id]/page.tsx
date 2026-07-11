@@ -78,14 +78,28 @@ export default async function PacienteDetalhePage({
           </div>
 
           <div className="space-y-1.5">
-            <label htmlFor="contato" className="text-sm font-medium text-ink">
-              Telefone ou E-mail
+            <label htmlFor="email" className="text-sm font-medium text-ink">
+              E-mail
             </label>
             <input
-              id="contato"
-              name="contato"
-              placeholder="(11) 98888-1234 ou email@exemplo.com"
-              defaultValue={paciente.contato ?? ""}
+              id="email"
+              name="email"
+              type="email"
+              placeholder="contato@exemplo.com"
+              defaultValue={paciente.email ?? ""}
+              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label htmlFor="telefone" className="text-sm font-medium text-ink">
+              Telefone
+            </label>
+            <input
+              id="telefone"
+              name="telefone"
+              placeholder="(11) 98888-1234"
+              defaultValue={paciente.telefone ?? ""}
               className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
