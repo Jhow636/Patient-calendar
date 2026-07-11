@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
@@ -16,6 +17,8 @@ import {
   parseMesParam,
 } from "@/lib/date";
 import { alternarStatusPagamento } from "@/lib/actions/pagamentos";
+
+export const metadata: Metadata = { title: "Financeiro" };
 
 export default async function FinanceiroPage({
   searchParams,

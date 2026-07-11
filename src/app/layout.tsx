@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agenda | Everton Dutra",
+  title: {
+    default: "Agenda | Everton Dutra",
+    template: "%s | Everton Dutra",
+  },
   description: "Agenda de sessões, pacientes e financeiro do consultório.",
 };
 

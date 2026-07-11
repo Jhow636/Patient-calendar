@@ -1,5 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { criarPaciente } from "@/lib/actions/pacientes";
+import { SubmitButton } from "@/components/submit-button";
+
+export const metadata: Metadata = { title: "Novo paciente" };
 
 export default function NovoPacientePage() {
   return (
@@ -65,12 +69,11 @@ export default function NovoPacientePage() {
           />
         </div>
 
-        <button
-          type="submit"
+        <SubmitButton
           className="w-full rounded-lg bg-primary px-4 py-2.5 font-medium text-white transition hover:opacity-90"
         >
           Salvar paciente
-        </button>
+        </SubmitButton>
       </form>
     </div>
   );

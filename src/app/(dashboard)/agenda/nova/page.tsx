@@ -1,8 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { criarSessao } from "@/lib/actions/sessoes";
 import { formatDataParam } from "@/lib/date";
+import { SubmitButton } from "@/components/submit-button";
+
+export const metadata: Metadata = { title: "Nova sessão" };
 
 export default async function NovaSessaoPage({
   searchParams,
@@ -118,12 +122,12 @@ export default async function NovaSessaoPage({
             />
           </div>
 
-          <button
-            type="submit"
+          <SubmitButton
+            pendingText="Marcando…"
             className="w-full rounded-lg bg-primary px-4 py-2.5 font-medium text-white transition hover:opacity-90"
           >
             Marcar sessão
-          </button>
+          </SubmitButton>
         </form>
       )}
     </div>

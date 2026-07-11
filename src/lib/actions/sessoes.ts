@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { formatDataParam, inicioSemana } from "@/lib/date";
+import { STATUS_SESSAO, type StatusSessao } from "@/lib/types";
 
 const OCORRENCIAS_RECORRENCIA = 12;
 
@@ -52,19 +53,21 @@ export async function criarSessao(formData: FormData) {
 
   const totalOcorrencias = dados.recorrencia === "SEMANAL" ? OCORRENCIAS_RECORRENCIA : 1;
 
-  for (let i = 0; i < totalOcorrencias; i++) {
-    const dataHora = new Date(primeiraData);
-    dataHora.setDate(dataHora.getDate() + i * 7);
+  await prisma.$transaction(
+    Array.from({ length: totalOcorrencias }, (_, i) => {
+      const dataHora = new Date(primeiraData);
+      dataHora.setDate(dataHora.getDate() + i * 7);
 
-    await prisma.sessao.create({
-      data: {
-        pacienteId: paciente.id,
-        dataHora,
-        recorrencia: dados.recorrencia,
-        pagamento: { create: { valor } },
-      },
-    });
-  }
+      return prisma.sessao.create({
+        data: {
+          pacienteId: paciente.id,
+          dataHora,
+          recorrencia: dados.recorrencia,
+          pagamento: { create: { valor } },
+        },
+      });
+    })
+  );
 
   revalidatePath("/agenda");
   revalidatePath(`/pacientes/${paciente.id}`);
@@ -72,6 +75,10 @@ export async function criarSessao(formData: FormData) {
 }
 
 export async function atualizarStatusSessao(id: string, status: string) {
+  if (!STATUS_SESSAO.includes(status as StatusSessao)) {
+    throw new Error("Status inválido");
+  }
+
   const usuario = await requireUsuario();
   const sessao = await exigirSessao(id, usuario.id);
 

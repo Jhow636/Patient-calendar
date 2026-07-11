@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { entrar } from "./actions";
+import { SubmitButton } from "@/components/submit-button";
+
+export const metadata: Metadata = { title: "Entrar" };
 
 export default async function LoginPage({
   searchParams,
@@ -54,12 +58,12 @@ export default async function LoginPage({
             </p>
           )}
 
-          <button
-            type="submit"
+          <SubmitButton
+            pendingText="Entrando…"
             className="w-full rounded-lg bg-primary px-4 py-2.5 font-medium text-white transition hover:opacity-90"
           >
             Entrar
-          </button>
+          </SubmitButton>
         </form>
       </div>
     </main>

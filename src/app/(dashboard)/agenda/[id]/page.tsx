@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
@@ -10,6 +11,9 @@ import type { StatusSessao, StatusPagamento } from "@/lib/types";
 import { atualizarStatusSessao, excluirSessao } from "@/lib/actions/sessoes";
 import { salvarNota } from "@/lib/actions/notas";
 import { alternarStatusPagamento, atualizarValorPagamento } from "@/lib/actions/pagamentos";
+import { SubmitButton } from "@/components/submit-button";
+
+export const metadata: Metadata = { title: "Sessão" };
 
 const OPCOES_STATUS: { valor: StatusSessao; label: string }[] = [
   { valor: "AGENDADA", label: "Agendada" },
@@ -151,12 +155,9 @@ export default async function SessaoDetalhePage({
             placeholder="Registre observações desta sessão…"
             className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
-          <button
-            type="submit"
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
-          >
+          <SubmitButton className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:opacity-90">
             Salvar nota
-          </button>
+          </SubmitButton>
         </form>
       </div>
 

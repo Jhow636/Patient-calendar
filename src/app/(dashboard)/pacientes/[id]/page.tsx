@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
@@ -7,6 +8,9 @@ import { statusPacienteInfo, statusSessaoInfo, statusPagamentoInfo } from "@/lib
 import { formatDataHora } from "@/lib/date";
 import type { StatusPaciente, StatusSessao, StatusPagamento } from "@/lib/types";
 import { atualizarPaciente, alternarStatusPaciente } from "@/lib/actions/pacientes";
+import { SubmitButton } from "@/components/submit-button";
+
+export const metadata: Metadata = { title: "Paciente" };
 
 export default async function PacienteDetalhePage({
   params,
@@ -113,12 +117,9 @@ export default async function PacienteDetalhePage({
             />
           </div>
 
-          <button
-            type="submit"
-            className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
-          >
+          <SubmitButton className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90">
             Salvar alterações
-          </button>
+          </SubmitButton>
         </form>
 
         <div className="space-y-4">
