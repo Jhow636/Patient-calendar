@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ChevronLeft } from "lucide-react";
 import { criarPaciente } from "@/lib/actions/pacientes";
 import { SubmitButton } from "@/components/submit-button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,9 +15,12 @@ export default function NovoPacientePage() {
   return (
     <div className="mx-auto max-w-lg space-y-6">
       <div>
-        <Link href="/pacientes" className="text-sm text-ink-soft hover:text-ink">
-          ← Pacientes
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/pacientes">
+            <ChevronLeft data-icon="inline-start" />
+            Pacientes
+          </Link>
+        </Button>
         <h1 className="mt-1 text-xl font-semibold text-ink">Novo paciente</h1>
       </div>
 

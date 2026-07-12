@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ChevronLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { criarSessao } from "@/lib/actions/sessoes";
 import { formatDataParam } from "@/lib/date";
 import { SubmitButton } from "@/components/submit-button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,10 +38,13 @@ export default async function NovaSessaoPage({
   return (
     <div className="mx-auto max-w-lg space-y-6">
       <div>
-        <Link href="/agenda" className="text-sm text-ink-soft hover:text-ink">
-          ← Agenda
-        </Link>
-        <h1 className="mt-1 text-xl font-semibold text-ink">Nova sessão</h1>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/agenda">
+            <ChevronLeft data-icon="inline-start" />
+            Agenda
+          </Link>
+        </Button>
+        <h1 className="mt-4 text-xl font-semibold text-ink">Nova sessão</h1>
       </div>
 
       {pacientes.length === 0 ? (

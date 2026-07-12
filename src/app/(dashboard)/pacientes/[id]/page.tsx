@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MessageCircle } from "lucide-react";
+import { ChevronLeft, MessageCircle } from "lucide-react";
 import { linkWhatsApp } from "@/lib/whatsapp";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
@@ -46,9 +46,12 @@ export default async function PacienteDetalhePage({
   return (
     <div className="space-y-8">
       <div>
-        <Link href="/pacientes" className="text-sm text-ink-soft hover:text-ink">
-          ← Pacientes
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/pacientes">
+            <ChevronLeft data-icon="inline-start" />
+            Pacientes
+          </Link>
+        </Button>
         <div className="mt-1 flex items-center justify-between">
           <h1 className="text-xl font-semibold text-ink">{paciente.nome}</h1>
           <div className="flex items-center gap-2">

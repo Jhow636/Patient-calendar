@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MessageCircle } from "lucide-react";
+import { ChevronLeft, MessageCircle } from "lucide-react";
 import { linkWhatsApp } from "@/lib/whatsapp";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
@@ -15,6 +15,7 @@ import { salvarNota } from "@/lib/actions/notas";
 import { alternarStatusPagamento, atualizarValorPagamento } from "@/lib/actions/pagamentos";
 import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
+import { Button as LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -58,9 +59,12 @@ export default async function SessaoDetalhePage({
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <Link href="/agenda" className="text-sm text-ink-soft hover:text-ink">
-          ← Agenda
-        </Link>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/agenda">
+            <ChevronLeft data-icon="inline-start" />
+            Agenda
+          </Link>
+        </Button>
         <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
           <div>
             <h1 className="text-xl font-semibold text-ink">
