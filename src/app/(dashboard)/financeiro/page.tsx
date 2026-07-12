@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
@@ -90,7 +91,8 @@ export default async function FinanceiroPage({
         <div className="flex items-center gap-2">
           <Button asChild variant="outline" size="sm">
             <Link href={`/financeiro?mes=${formatMesParam(mesAnterior(referencia))}`}>
-              ← Mês anterior
+              <ChevronLeft data-icon="inline-start" />
+              Mês anterior
             </Link>
           </Button>
           <Button asChild variant="outline" size="sm">
@@ -98,7 +100,8 @@ export default async function FinanceiroPage({
           </Button>
           <Button asChild variant="outline" size="sm">
             <Link href={`/financeiro?mes=${formatMesParam(proximoMes(referencia))}`}>
-              Próximo mês →
+              Próximo mês
+              <ChevronRight data-icon="inline-end" />
             </Link>
           </Button>
         </div>

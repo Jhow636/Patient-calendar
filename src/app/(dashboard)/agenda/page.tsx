@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
@@ -92,7 +93,8 @@ export default async function AgendaPage({
         <div className="flex flex-wrap items-center gap-2">
           <Button asChild variant="outline" size="sm">
             <Link href={`/agenda?inicio=${formatDataParam(semanaAnterior(inicio))}`}>
-              ← Anterior
+              <ChevronLeft data-icon="inline-start" />
+              Anterior
             </Link>
           </Button>
           <Button asChild variant="outline" size="sm">
@@ -100,7 +102,8 @@ export default async function AgendaPage({
           </Button>
           <Button asChild variant="outline" size="sm">
             <Link href={`/agenda?inicio=${formatDataParam(proximaSemana(inicio))}`}>
-              Próxima →
+              Próxima
+              <ChevronRight data-icon="inline-end" />
             </Link>
           </Button>
           <Button asChild size="sm">
