@@ -12,6 +12,11 @@ import { atualizarStatusSessao, excluirSessao } from "@/lib/actions/sessoes";
 import { salvarNota } from "@/lib/actions/notas";
 import { alternarStatusPagamento, atualizarValorPagamento } from "@/lib/actions/pagamentos";
 import { SubmitButton } from "@/components/submit-button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export const metadata: Metadata = { title: "Sessão" };
 
@@ -67,105 +72,100 @@ export default async function SessaoDetalhePage({
         </div>
       </div>
 
-      <div className="space-y-3 rounded-xl border border-line bg-paper-raised p-6">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-          Status da sessão
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {OPCOES_STATUS.map((opcao) => {
-            const acaoStatus = atualizarStatusSessao.bind(null, sessao.id, opcao.valor);
-            const ativo = sessao.status === opcao.valor;
-            return (
-              <form key={opcao.valor} action={acaoStatus}>
-                <button
-                  type="submit"
-                  disabled={ativo}
-                  className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition ${
-                    ativo
-                      ? "border-primary bg-primary text-white"
-                      : "border-line text-ink-soft hover:border-primary hover:text-primary"
-                  }`}
-                >
-                  {opcao.label}
-                </button>
-              </form>
-            );
-          })}
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+            Status da sessão
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-2">
+            {OPCOES_STATUS.map((opcao) => {
+              const acaoStatus = atualizarStatusSessao.bind(null, sessao.id, opcao.valor);
+              const ativo = sessao.status === opcao.valor;
+              return (
+                <form key={opcao.valor} action={acaoStatus}>
+                  <Button
+                    type="submit"
+                    disabled={ativo}
+                    variant={ativo ? "default" : "outline"}
+                    size="sm"
+                    className="disabled:opacity-100"
+                  >
+                    {opcao.label}
+                  </Button>
+                </form>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
 
       {sessao.pagamento && (
-        <div className="space-y-3 rounded-xl border border-line bg-paper-raised p-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between text-sm font-semibold uppercase tracking-wide text-ink-soft">
               Pagamento
-            </h2>
-            {pagamentoStatus && (
-              <StatusChip variant={pagamentoStatus.variant}>{pagamentoStatus.label}</StatusChip>
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-end gap-3">
-            <form action={atualizarValorComId} className="flex items-end gap-2">
-              <div className="space-y-1.5">
-                <label htmlFor="valor" className="text-sm font-medium text-ink">
-                  Valor (R$)
-                </label>
-                <input
-                  id="valor"
-                  name="valor"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  defaultValue={sessao.pagamento.valor}
-                  className="w-32 rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </div>
-              <button
-                type="submit"
-                className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-              >
-                Atualizar valor
-              </button>
-            </form>
-
-            {alternarPagamentoComId && (
-              <form action={alternarPagamentoComId}>
-                <button
-                  type="submit"
-                  className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:opacity-90"
-                >
-                  Marcar como {sessao.pagamento.status === "PAGO" ? "pendente" : "pago"}
-                </button>
+              {pagamentoStatus && (
+                <StatusChip variant={pagamentoStatus.variant}>
+                  {pagamentoStatus.label}
+                </StatusChip>
+              )}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap items-end gap-3">
+              <form action={atualizarValorComId} className="flex items-end gap-2">
+                <div className="space-y-1.5">
+                  <Label htmlFor="valor">Valor (R$)</Label>
+                  <Input
+                    id="valor"
+                    name="valor"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    defaultValue={sessao.pagamento.valor}
+                    className="w-32"
+                  />
+                </div>
+                <Button type="submit" variant="outline">
+                  Atualizar valor
+                </Button>
               </form>
-            )}
-          </div>
-        </div>
+
+              {alternarPagamentoComId && (
+                <form action={alternarPagamentoComId}>
+                  <Button type="submit">
+                    Marcar como {sessao.pagamento.status === "PAGO" ? "pendente" : "pago"}
+                  </Button>
+                </form>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
-      <div className="space-y-3 rounded-xl border border-line bg-paper-raised p-6">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-          Nota da sessão
-        </h2>
-        <form action={salvarNotaComId} className="space-y-3">
-          <textarea
-            name="texto"
-            rows={6}
-            defaultValue={sessao.nota?.texto ?? ""}
-            placeholder="Registre observações desta sessão…"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-          <SubmitButton className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:opacity-90">
-            Salvar nota
-          </SubmitButton>
-        </form>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+            Nota da sessão
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form action={salvarNotaComId} className="space-y-3">
+            <Textarea
+              name="texto"
+              rows={6}
+              defaultValue={sessao.nota?.texto ?? ""}
+              placeholder="Registre observações desta sessão…"
+            />
+            <SubmitButton size="default">Salvar nota</SubmitButton>
+          </form>
+        </CardContent>
+      </Card>
 
       <form action={excluirComId} className="flex justify-end">
-        <ConfirmSubmitButton
-          confirmMessage="Excluir esta sessão? Essa ação não pode ser desfeita."
-          className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-danger hover:text-danger"
-        >
+        <ConfirmSubmitButton confirmMessage="Excluir esta sessão? Essa ação não pode ser desfeita.">
           Excluir sessão
         </ConfirmSubmitButton>
       </form>

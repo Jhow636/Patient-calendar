@@ -17,6 +17,16 @@ import {
   parseMesParam,
 } from "@/lib/date";
 import { alternarStatusPagamento } from "@/lib/actions/pagamentos";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export const metadata: Metadata = { title: "Financeiro" };
 
@@ -78,46 +88,41 @@ export default async function FinanceiroPage({
           <p className="text-sm text-ink-soft">{formatMes(referencia)}</p>
         </div>
         <div className="flex items-center gap-2">
-          <Link
-            href={`/financeiro?mes=${formatMesParam(mesAnterior(referencia))}`}
-            className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-          >
-            ← Mês anterior
-          </Link>
-          <Link
-            href="/financeiro"
-            className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-          >
-            Este mês
-          </Link>
-          <Link
-            href={`/financeiro?mes=${formatMesParam(proximoMes(referencia))}`}
-            className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-          >
-            Próximo mês →
-          </Link>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/financeiro?mes=${formatMesParam(mesAnterior(referencia))}`}>
+              ← Mês anterior
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/financeiro">Este mês</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/financeiro?mes=${formatMesParam(proximoMes(referencia))}`}>
+              Próximo mês →
+            </Link>
+          </Button>
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-line bg-paper-raised p-4">
+        <Card className="gap-1 p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">
             Total do mês
           </p>
-          <p className="mt-1 text-2xl font-semibold text-ink tabular-nums">{formatMoeda(total)}</p>
-        </div>
-        <div className="rounded-xl border border-line bg-paper-raised p-4">
+          <p className="text-2xl font-semibold text-ink tabular-nums">{formatMoeda(total)}</p>
+        </Card>
+        <Card className="gap-1 p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Recebido</p>
-          <p className="mt-1 text-2xl font-semibold text-success tabular-nums">
+          <p className="text-2xl font-semibold text-success tabular-nums">
             {formatMoeda(recebido)}
           </p>
-        </div>
-        <div className="rounded-xl border border-line bg-paper-raised p-4">
+        </Card>
+        <Card className="gap-1 p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Pendente</p>
-          <p className="mt-1 text-2xl font-semibold text-warning tabular-nums">
+          <p className="text-2xl font-semibold text-warning tabular-nums">
             {formatMoeda(pendente)}
           </p>
-        </div>
+        </Card>
       </div>
 
       {resumoPacientes.length > 0 && (
@@ -125,30 +130,32 @@ export default async function FinanceiroPage({
           <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
             Por paciente
           </h2>
-          <div className="overflow-x-auto rounded-xl border border-line bg-paper-raised">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-ink-soft">
-                  <th className="px-4 py-2 font-medium">Paciente</th>
-                  <th className="px-4 py-2 font-medium">Sessões</th>
-                  <th className="px-4 py-2 font-medium">Total</th>
-                  <th className="px-4 py-2 font-medium">Recebido</th>
-                </tr>
-              </thead>
-              <tbody>
+          <Card className="overflow-hidden py-0">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Paciente</TableHead>
+                  <TableHead>Sessões</TableHead>
+                  <TableHead>Total</TableHead>
+                  <TableHead>Recebido</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {resumoPacientes.map((p) => (
-                  <tr key={p.nome} className="border-b border-line last:border-0">
-                    <td className="px-4 py-2 text-ink">{p.nome}</td>
-                    <td className="px-4 py-2 text-ink-soft tabular-nums">{p.sessoes}</td>
-                    <td className="px-4 py-2 text-ink tabular-nums">{formatMoeda(p.total)}</td>
-                    <td className="px-4 py-2 text-success tabular-nums">
+                  <TableRow key={p.nome}>
+                    <TableCell className="text-ink">{p.nome}</TableCell>
+                    <TableCell className="text-ink-soft tabular-nums">{p.sessoes}</TableCell>
+                    <TableCell className="text-ink tabular-nums">
+                      {formatMoeda(p.total)}
+                    </TableCell>
+                    <TableCell className="text-success tabular-nums">
                       {formatMoeda(p.recebido)}
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </TableBody>
+            </Table>
+          </Card>
         </div>
       )}
 
@@ -162,7 +169,7 @@ export default async function FinanceiroPage({
             Nenhuma sessão com pagamento neste mês.
           </p>
         ) : (
-          <ul className="divide-y divide-line rounded-xl border border-line bg-paper-raised">
+          <Card className="gap-0 divide-y divide-line overflow-hidden py-0">
             {comPagamento.map((sessao) => {
               const status = statusPagamentoInfo(sessao.pagamento.status as StatusPagamento);
               const alternar = alternarStatusPagamento.bind(
@@ -171,7 +178,10 @@ export default async function FinanceiroPage({
                 sessao.pagamento.status
               );
               return (
-                <li key={sessao.id} className="flex items-center justify-between gap-3 px-4 py-3">
+                <div
+                  key={sessao.id}
+                  className="flex items-center justify-between gap-3 px-4 py-3"
+                >
                   <div>
                     <Link
                       href={`/agenda/${sessao.id}`}
@@ -187,18 +197,15 @@ export default async function FinanceiroPage({
                     </span>
                     <StatusChip variant={status.variant}>{status.label}</StatusChip>
                     <form action={alternar}>
-                      <button
-                        type="submit"
-                        className="rounded-lg border border-line px-2.5 py-1 text-xs font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-                      >
+                      <Button type="submit" variant="outline" size="xs">
                         {sessao.pagamento.status === "PAGO" ? "Marcar pendente" : "Marcar pago"}
-                      </button>
+                      </Button>
                     </form>
                   </div>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </Card>
         )}
       </div>
     </div>

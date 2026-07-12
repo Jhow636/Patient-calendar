@@ -6,6 +6,8 @@ import { StatusChip } from "@/components/status-chip";
 import { statusPacienteInfo } from "@/lib/status-labels";
 import { formatMoeda } from "@/lib/format";
 import type { StatusPaciente } from "@/lib/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = { title: "Pacientes" };
 
@@ -26,12 +28,9 @@ export default async function PacientesPage() {
             {pacientes.length} {pacientes.length === 1 ? "cadastrado" : "cadastrados"}
           </p>
         </div>
-        <Link
-          href="/pacientes/novo"
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
-        >
-          Novo paciente
-        </Link>
+        <Button asChild>
+          <Link href="/pacientes/novo">Novo paciente</Link>
+        </Button>
       </div>
 
       {pacientes.length === 0 ? (
@@ -40,45 +39,41 @@ export default async function PacientesPage() {
           <p className="mt-1 text-sm text-ink-soft">
             Cadastre o primeiro paciente para começar a marcar sessões.
           </p>
-          <Link
-            href="/pacientes/novo"
-            className="mt-4 inline-block rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
-          >
-            Cadastrar primeiro paciente
-          </Link>
+          <Button asChild className="mt-4">
+            <Link href="/pacientes/novo">Cadastrar primeiro paciente</Link>
+          </Button>
         </div>
       ) : (
-        <ul className="divide-y divide-line rounded-xl border border-line bg-paper-raised">
+        <Card className="gap-0 divide-y divide-line overflow-hidden py-0">
           {pacientes.map((paciente) => {
             const status = statusPacienteInfo(paciente.status as StatusPaciente);
             return (
-              <li key={paciente.id}>
-                <Link
-                  href={`/pacientes/${paciente.id}`}
-                  className="flex items-center justify-between gap-4 px-4 py-3 transition hover:bg-paper"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate font-medium text-ink">{paciente.nome}</p>
-                    <p className="truncate text-sm text-ink-soft">
-                      {[
-                        [paciente.email, paciente.telefone].filter(Boolean).join(" / "),
-                        paciente.valorSessao != null
-                          ? formatMoeda(paciente.valorSessao)
-                          : null,
-                        `${paciente._count.sessoes} ${
-                          paciente._count.sessoes === 1 ? "sessão" : "sessões"
-                        }`,
-                      ]
-                        .filter(Boolean)
-                        .join(" · ")}
-                    </p>
-                  </div>
-                  <StatusChip variant={status.variant}>{status.label}</StatusChip>
-                </Link>
-              </li>
+              <Link
+                key={paciente.id}
+                href={`/pacientes/${paciente.id}`}
+                className="flex items-center justify-between gap-4 px-4 py-3 transition hover:bg-muted/50"
+              >
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-ink">{paciente.nome}</p>
+                  <p className="truncate text-sm text-ink-soft">
+                    {[
+                      [paciente.email, paciente.telefone].filter(Boolean).join(" / "),
+                      paciente.valorSessao != null
+                        ? formatMoeda(paciente.valorSessao)
+                        : null,
+                      `${paciente._count.sessoes} ${
+                        paciente._count.sessoes === 1 ? "sessão" : "sessões"
+                      }`,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                </div>
+                <StatusChip variant={status.variant}>{status.label}</StatusChip>
+              </Link>
             );
           })}
-        </ul>
+        </Card>
       )}
     </div>
   );

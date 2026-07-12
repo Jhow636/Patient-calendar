@@ -5,6 +5,16 @@ import { requireUsuario } from "@/lib/auth-helpers";
 import { criarSessao } from "@/lib/actions/sessoes";
 import { formatDataParam } from "@/lib/date";
 import { SubmitButton } from "@/components/submit-button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const metadata: Metadata = { title: "Nova sessão" };
 
@@ -40,95 +50,67 @@ export default async function NovaSessaoPage({
           </Link>
         </p>
       ) : (
-        <form action={criarSessao} className="space-y-4 rounded-xl border border-line bg-paper-raised p-6">
-          <div className="space-y-1.5">
-            <label htmlFor="pacienteId" className="text-sm font-medium text-ink">
-              Paciente
-            </label>
-            <select
-              id="pacienteId"
-              name="pacienteId"
-              required
-              defaultValue={pacienteId ?? ""}
-              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-            >
-              <option value="" disabled>
-                Selecione um paciente
-              </option>
-              {pacientes.map((paciente) => (
-                <option key={paciente.id} value={paciente.id}>
-                  {paciente.nome}
-                </option>
-              ))}
-            </select>
-          </div>
+        <Card>
+          <CardContent>
+            <form action={criarSessao} className="space-y-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="pacienteId">Paciente</Label>
+                <Select name="pacienteId" defaultValue={pacienteId} required>
+                  <SelectTrigger id="pacienteId" className="w-full">
+                    <SelectValue placeholder="Selecione um paciente" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {pacientes.map((paciente) => (
+                      <SelectItem key={paciente.id} value={paciente.id}>
+                        {paciente.nome}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label htmlFor="data" className="text-sm font-medium text-ink">
-                Data
-              </label>
-              <input
-                id="data"
-                name="data"
-                type="date"
-                required
-                defaultValue={hoje}
-                className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label htmlFor="hora" className="text-sm font-medium text-ink">
-                Horário
-              </label>
-              <input
-                id="hora"
-                name="hora"
-                type="time"
-                required
-                defaultValue="09:00"
-                className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-              />
-            </div>
-          </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="data">Data</Label>
+                  <Input id="data" name="data" type="date" required defaultValue={hoje} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="hora">Horário</Label>
+                  <Input id="hora" name="hora" type="time" required defaultValue="09:00" />
+                </div>
+              </div>
 
-          <div className="space-y-1.5">
-            <label htmlFor="recorrencia" className="text-sm font-medium text-ink">
-              Recorrência
-            </label>
-            <select
-              id="recorrencia"
-              name="recorrencia"
-              defaultValue="NENHUMA"
-              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-            >
-              <option value="NENHUMA">Única</option>
-              <option value="SEMANAL">Semanal (12 sessões)</option>
-            </select>
-          </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="recorrencia">Recorrência</Label>
+                <Select name="recorrencia" defaultValue="NENHUMA">
+                  <SelectTrigger id="recorrencia" className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="NENHUMA">Única</SelectItem>
+                    <SelectItem value="SEMANAL">Semanal (12 sessões)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          <div className="space-y-1.5">
-            <label htmlFor="valor" className="text-sm font-medium text-ink">
-              Valor da sessão (R$)
-            </label>
-            <input
-              id="valor"
-              name="valor"
-              type="number"
-              step="0.01"
-              min="0"
-              placeholder="Deixe em branco para usar o valor padrão do paciente"
-              className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-            />
-          </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="valor">Valor da sessão (R$)</Label>
+                <Input
+                  id="valor"
+                  name="valor"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="Deixe em branco para usar o valor padrão do paciente"
+                />
+              </div>
 
-          <SubmitButton
-            pendingText="Marcando…"
-            className="w-full rounded-lg bg-primary px-4 py-2.5 font-medium text-white transition hover:opacity-90"
-          >
-            Marcar sessão
-          </SubmitButton>
-        </form>
+              <SubmitButton pendingText="Marcando…" className="w-full">
+                Marcar sessão
+              </SubmitButton>
+            </form>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

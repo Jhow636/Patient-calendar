@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { statusSessaoInfo } from "@/lib/status-labels";
 import type { StatusSessao } from "@/lib/types";
 import { formatMoeda } from "@/lib/format";
@@ -88,37 +90,29 @@ export default async function AgendaPage({
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Link
-            href={`/agenda?inicio=${formatDataParam(semanaAnterior(inicio))}`}
-            className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-          >
-            ← Anterior
-          </Link>
-          <Link
-            href="/agenda"
-            className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-          >
-            Hoje
-          </Link>
-          <Link
-            href={`/agenda?inicio=${formatDataParam(proximaSemana(inicio))}`}
-            className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-primary hover:text-primary"
-          >
-            Próxima →
-          </Link>
-          <Link
-            href="/agenda/nova"
-            className="rounded-lg bg-primary px-4 py-1.5 text-sm font-medium text-white transition hover:opacity-90"
-          >
-            Nova sessão
-          </Link>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/agenda?inicio=${formatDataParam(semanaAnterior(inicio))}`}>
+              ← Anterior
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/agenda">Hoje</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/agenda?inicio=${formatDataParam(proximaSemana(inicio))}`}>
+              Próxima →
+            </Link>
+          </Button>
+          <Button asChild size="sm">
+            <Link href="/agenda/nova">Nova sessão</Link>
+          </Button>
         </div>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-line bg-paper-raised px-4 py-3">
+        <Card className="gap-0.5 px-4 py-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">Hoje</p>
-          <p className="mt-0.5 text-lg font-semibold text-ink">
+          <p className="text-lg font-semibold text-ink">
             {sessoesHoje.length === 0
               ? "Sem sessões"
               : `${sessoesHoje.length} ${sessoesHoje.length === 1 ? "sessão" : "sessões"}`}
@@ -128,27 +122,27 @@ export default async function AgendaPage({
               Próxima: {formatHora(proximaHoje.dataHora)} · {proximaHoje.paciente.nome}
             </p>
           )}
-        </div>
-        <div className="rounded-xl border border-line bg-paper-raised px-4 py-3">
+        </Card>
+        <Card className="gap-0.5 px-4 py-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">
             Nesta semana
           </p>
-          <p className="mt-0.5 text-lg font-semibold text-ink">
+          <p className="text-lg font-semibold text-ink">
             {ativasSemana.length} {ativasSemana.length === 1 ? "sessão" : "sessões"}
           </p>
-        </div>
-        <div className="rounded-xl border border-line bg-paper-raised px-4 py-3">
+        </Card>
+        <Card className="gap-0.5 px-4 py-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">
             A receber (realizadas)
           </p>
           <p
-            className={`mt-0.5 text-lg font-semibold tabular-nums ${
+            className={`text-lg font-semibold tabular-nums ${
               pendenteSemana > 0 ? "text-warning" : "text-ink"
             }`}
           >
             {formatMoeda(pendenteSemana)}
           </p>
-        </div>
+        </Card>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-7 lg:gap-2">
@@ -170,7 +164,7 @@ export default async function AgendaPage({
                 <span
                   className={
                     ehHoje
-                      ? "rounded-full bg-primary px-1.5 py-0.5 text-[11px] leading-none text-white"
+                      ? "rounded-full bg-primary px-1.5 py-0.5 text-[11px] leading-none text-primary-foreground"
                       : ""
                   }
                 >

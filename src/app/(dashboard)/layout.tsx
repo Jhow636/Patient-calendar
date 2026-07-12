@@ -1,4 +1,5 @@
 import { requireUsuario } from "@/lib/auth-helpers";
+import { Button } from "@/components/ui/button";
 import { NavLink } from "./nav-link";
 import { sair } from "./actions";
 
@@ -24,12 +25,9 @@ export default async function DashboardLayout({
             <div className="flex items-center gap-3">
               <span className="hidden text-sm text-ink-soft sm:inline">{usuario.name}</span>
               <form action={sair}>
-                <button
-                  type="submit"
-                  className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink-soft transition hover:border-danger hover:text-danger"
-                >
+                <Button type="submit" variant="outline" size="sm">
                   Sair
-                </button>
+                </Button>
               </form>
             </div>
           </div>

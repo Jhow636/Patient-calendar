@@ -2,6 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { criarPaciente } from "@/lib/actions/pacientes";
 import { SubmitButton } from "@/components/submit-button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export const metadata: Metadata = { title: "Novo paciente" };
 
@@ -15,92 +19,55 @@ export default function NovoPacientePage() {
         <h1 className="mt-1 text-xl font-semibold text-ink">Novo paciente</h1>
       </div>
 
-      <form action={criarPaciente} className="space-y-4 rounded-xl border border-line bg-paper-raised p-6">
-        <div className="space-y-1.5">
-          <label htmlFor="nome" className="text-sm font-medium text-ink">
-            Nome
-          </label>
-          <input
-            id="nome"
-            name="nome"
-            required
-            autoFocus
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-        </div>
+      <Card>
+        <CardContent>
+          <form action={criarPaciente} className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="nome">Nome</Label>
+              <Input id="nome" name="nome" required autoFocus />
+            </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="email" className="text-sm font-medium text-ink">
-            E-mail
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="contato@exemplo.com"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-        </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="email">E-mail</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="contato@exemplo.com"
+              />
+            </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="telefone" className="text-sm font-medium text-ink">
-            Telefone
-          </label>
-          <input
-            id="telefone"
-            name="telefone"
-            placeholder="(11) 98888-1234"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-        </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="telefone">Telefone</Label>
+              <Input id="telefone" name="telefone" placeholder="(11) 98888-1234" />
+            </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="valorSessao" className="text-sm font-medium text-ink">
-            Valor da sessão (R$)
-          </label>
-          <input
-            id="valorSessao"
-            name="valorSessao"
-            type="number"
-            step="0.01"
-            min="0"
-            placeholder="150.00"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-        </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="valorSessao">Valor da sessão (R$)</Label>
+              <Input
+                id="valorSessao"
+                name="valorSessao"
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder="150.00"
+              />
+            </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="observacoes" className="text-sm font-medium text-ink">
-            Observações clínicas
-          </label>
-          <textarea
-            id="observacoes"
-            name="observacoes"
-            rows={4}
-            placeholder="Anotações gerais sobre o paciente"
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-        </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="prontuario">Prontuário</Label>
+              <Textarea
+                id="prontuario"
+                name="prontuario"
+                rows={6}
+                placeholder="Histórico clínico do paciente, diagnósticos, tratamentos anteriores..."
+              />
+            </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="prontuario" className="text-sm font-medium text-ink">
-            Prontuário
-          </label>
-          <textarea
-            id="prontuario"
-            name="prontuario"
-            rows={6}
-            placeholder="Histórico clínico do paciente, diagnósticos, tratamentos anteriores..."
-            className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-          />
-        </div>
-
-        <SubmitButton
-          className="w-full rounded-lg bg-primary px-4 py-2.5 font-medium text-white transition hover:opacity-90"
-        >
-          Salvar paciente
-        </SubmitButton>
-      </form>
+            <SubmitButton className="w-full">Salvar paciente</SubmitButton>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

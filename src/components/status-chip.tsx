@@ -1,3 +1,6 @@
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+
 const VARIANTS = {
   success: "bg-success-bg text-success",
   warning: "bg-warning-bg text-warning",
@@ -14,10 +17,8 @@ export function StatusChip({
   children: React.ReactNode;
 }) {
   return (
-    <span
-      className={`inline-flex shrink-0 items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${VARIANTS[variant]}`}
-    >
+    <Badge variant="secondary" className={cn("rounded-full", VARIANTS[variant])}>
       {children}
-    </span>
+    </Badge>
   );
 }
