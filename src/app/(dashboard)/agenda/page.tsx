@@ -83,7 +83,7 @@ export default async function AgendaPage({
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-ink">Agenda</h1>
+          <h1 className="text-3xl font-bold text-ink">Agenda</h1>
           <p className="text-sm text-ink-soft">
             {formatDiaCompleto(dias[0])} – {formatDiaCompleto(dias[6])}
           </p>

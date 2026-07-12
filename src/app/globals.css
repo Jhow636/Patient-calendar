@@ -5,27 +5,28 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Paleta do consultório (verde sálvia + ocre).
+ * Paleta do consultório (verde + azul-marinho, sempre em tema claro).
  * Os tokens semânticos do shadcn/ui (--background, --primary, ...) derivam
  * destes valores, então os componentes de @/components/ui seguem o tema.
  */
 :root {
-  --color-paper: #efebe3;
-  --color-paper-raised: #f7f4ec;
-  --color-ink: #1f2a24;
-  --color-ink-soft: #59645c;
-  --color-primary: #3b5346;
-  --color-primary-soft: #6b8574;
-  --color-ochre: #a9702f;
-  --color-line: #d9d2c2;
-  --color-success: #2f7d5c;
-  --color-success-bg: #2f7d5c1a;
-  --color-warning: #b8862b;
-  --color-warning-bg: #b8862b1a;
-  --color-danger: #b3492f;
-  --color-danger-bg: #b3492f1a;
-  --color-info: #3a6ea5;
-  --color-info-bg: #3a6ea51a;
+  color-scheme: light;
+  --color-paper: #e9f1e4;
+  --color-paper-raised: #ffffff;
+  --color-ink: #2c3254;
+  --color-ink-soft: #8f96ad;
+  --color-primary: #55a05e;
+  --color-primary-soft: #8cc084;
+  --color-ochre: #d9a257;
+  --color-line: #e7ebe3;
+  --color-success: #4f9d58;
+  --color-success-bg: #4f9d581a;
+  --color-warning: #c08a2d;
+  --color-warning-bg: #c08a2d1a;
+  --color-danger: #d96b6b;
+  --color-danger-bg: #d96b6b1a;
+  --color-info: #5f83c4;
+  --color-info-bg: #5f83c41a;
 
   /* Tokens shadcn/ui */
   --background: var(--color-paper);
@@ -35,12 +36,12 @@
   --popover: var(--color-paper-raised);
   --popover-foreground: var(--color-ink);
   --primary: var(--color-primary);
-  --primary-foreground: #f7f4ec;
-  --secondary: #e6e1d2;
+  --primary-foreground: #ffffff;
+  --secondary: #eef3ec;
   --secondary-foreground: var(--color-ink);
-  --muted: #e6e1d2;
+  --muted: #eef3ec;
   --muted-foreground: var(--color-ink-soft);
-  --accent: #e6e1d2;
+  --accent: #eef3ec;
   --accent-foreground: var(--color-ink);
   --destructive: var(--color-danger);
   --border: var(--color-line);
@@ -51,46 +52,15 @@
   --chart-3: var(--color-info);
   --chart-4: var(--color-warning);
   --chart-5: var(--color-danger);
-  --radius: 0.625rem;
-  --sidebar: var(--color-paper-raised);
-  --sidebar-foreground: var(--color-ink);
+  --radius: 1rem;
+  --sidebar: var(--color-primary-soft);
+  --sidebar-foreground: #ffffff;
   --sidebar-primary: var(--color-primary);
-  --sidebar-primary-foreground: #f7f4ec;
-  --sidebar-accent: #e6e1d2;
-  --sidebar-accent-foreground: var(--color-ink);
-  --sidebar-border: var(--color-line);
-  --sidebar-ring: var(--color-primary-soft);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-paper: #14120d;
-    --color-paper-raised: #1c1a14;
-    --color-ink: #e9e4d8;
-    --color-ink-soft: #a79f8d;
-    --color-primary: #8fb39d;
-    --color-primary-soft: #6d9583;
-    --color-ochre: #d9a257;
-    --color-line: #322d24;
-    --color-success: #7fbfa0;
-    --color-success-bg: #7fbfa026;
-    --color-warning: #e0b877;
-    --color-warning-bg: #e0b87726;
-    --color-danger: #e0876c;
-    --color-danger-bg: #e0876c26;
-    --color-info: #85b0dd;
-    --color-info-bg: #85b0dd26;
-
-    /* Ajustes shadcn que não derivam direto da paleta */
-    --primary-foreground: #14120d;
-    --secondary: #262219;
-    --secondary-foreground: var(--color-ink);
-    --muted: #262219;
-    --accent: #262219;
-    --accent-foreground: var(--color-ink);
-    --sidebar-primary-foreground: #14120d;
-    --sidebar-accent: #262219;
-  }
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff40;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: transparent;
+  --sidebar-ring: #ffffff80;
 }
 
 @theme inline {

@@ -84,7 +84,7 @@ export default async function FinanceiroPage({
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-ink">Financeiro</h1>
+          <h1 className="text-3xl font-bold text-ink">Financeiro</h1>
           <p className="text-sm text-ink-soft">{formatMes(referencia)}</p>
         </div>
         <div className="flex items-center gap-2">
