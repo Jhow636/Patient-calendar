@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Fundo branco -->
+  <rect width="64" height="64" fill="#ffffff"/>
+
+  <!-- Espiral em preto -->
+  <path d="M 32 8 Q 48 8 48 24 Q 48 40 32 40 Q 20 40 20 28 Q 20 18 28 18 Q 36 18 36 24 Q 36 28 32 28"
+        stroke="#2c3254" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

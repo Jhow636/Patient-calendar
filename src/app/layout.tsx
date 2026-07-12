@@ -14,10 +14,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Agenda | Everton Dutra",
+    default: "PsiAgenda | Everton Dutra",
     template: "%s | Everton Dutra",
   },
   description: "Agenda de sessões, pacientes e financeiro do consultório.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
