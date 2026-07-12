@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { MessageCircle } from "lucide-react";
+import { linkWhatsApp } from "@/lib/whatsapp";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
@@ -51,6 +53,18 @@ export default async function PacienteDetalhePage({
           <h1 className="text-xl font-semibold text-ink">{paciente.nome}</h1>
           <div className="flex items-center gap-2">
             <StatusChip variant={status.variant}>{status.label}</StatusChip>
+            {paciente.telefone && (
+              <Button asChild variant="outline" size="sm">
+                <a
+                  href={linkWhatsApp(paciente.telefone, `Olá, ${paciente.nome}! Tudo bem?`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle data-icon="inline-start" />
+                  WhatsApp
+                </a>
+              </Button>
+            )}
             <form action={alternarStatus}>
               <Button type="submit" variant="outline" size="sm">
                 {paciente.status === "ATIVO" ? "Marcar inativo" : "Marcar ativo"}

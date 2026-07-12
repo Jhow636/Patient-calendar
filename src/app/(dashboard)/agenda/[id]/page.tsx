@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { MessageCircle } from "lucide-react";
+import { linkWhatsApp } from "@/lib/whatsapp";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
@@ -68,7 +70,24 @@ export default async function SessaoDetalhePage({
             </h1>
             <p className="text-sm text-ink-soft">{formatDataHora(sessao.dataHora)}</p>
           </div>
-          <StatusChip variant={status.variant}>{status.label}</StatusChip>
+          <div className="flex items-center gap-2">
+            {sessao.paciente.telefone && (
+              <Button asChild variant="outline" size="sm">
+                <a
+                  href={linkWhatsApp(
+                    sessao.paciente.telefone,
+                    `Olá, ${sessao.paciente.nome}! Passando para lembrar da sua sessão: ${formatDataHora(sessao.dataHora)}. Qualquer imprevisto, é só me avisar.`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle data-icon="inline-start" />
+                  Lembrar no WhatsApp
+                </a>
+              </Button>
+            )}
+            <StatusChip variant={status.variant}>{status.label}</StatusChip>
+          </div>
         </div>
       </div>
 
