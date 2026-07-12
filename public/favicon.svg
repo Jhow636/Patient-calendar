@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <style>
+      circle { fill: #55a05e; }
+      path { stroke: #000; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    </style>
+  </defs>
+  <circle cx="128" cy="128" r="128"/>
+  <path d="M 128 60 Q 180 60 180 112 Q 180 164 128 164 Q 80 164 80 112 Q 80 72 112 72 Q 144 72 144 112 Q 144 136 128 136"/>
+</svg>
