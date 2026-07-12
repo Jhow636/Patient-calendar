@@ -18,6 +18,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  // api/cron tem autenticação própria via CRON_SECRET (Bearer token)
-  matcher: ["/((?!api/auth|api/cron|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],
 };
