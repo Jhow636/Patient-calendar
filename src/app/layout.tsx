@@ -18,12 +18,6 @@ export const metadata: Metadata = {
     template: "%s | Everton Dutra",
   },
   description: "Agenda de sessões, pacientes e financeiro do consultório.",
-  icons: {
-    icon: "/favicon.png",
-  },
-  openGraph: {
-    images: ["/favicon.png"],
-  },
 };
 
 export default function RootLayout({
