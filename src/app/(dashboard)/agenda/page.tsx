@@ -187,7 +187,7 @@ export default async function AgendaPage({
                       <li key={sessao.id}>
                         <Link
                           href={`/agenda/${sessao.id}`}
-                          className={`block rounded-lg border border-line border-l-[3px] bg-paper px-2 py-1.5 transition hover:border-primary ${
+                          className={`block rounded-lg border border-line border-l-[3px] bg-muted/60 px-2 py-1.5 transition hover:border-primary ${
                             BORDA_STATUS[sessao.status as StatusSessao]
                           }`}
                         >
