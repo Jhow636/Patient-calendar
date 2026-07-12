@@ -41,7 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/generated/prisma
+# /src/generated/prisma - now committed to repo for Vercel builds
 
 # banco de dados local (SQLite)
 /prisma/dev.db
