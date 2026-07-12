@@ -33,7 +33,7 @@ async function main() {
       nome: "João Pereira",
       telefone: "(11) 98888-1234",
       valorSessao: 180,
-      observacoes: "Processo focado em transição de carreira e autoconfiança.",
+      prontuario: "Processo focado em transição de carreira e autoconfiança.",
       terapeutaId: terapeuta.id,
     },
   });
@@ -42,7 +42,7 @@ async function main() {
       nome: "Ana Costa",
       email: "ana.costa@email.com",
       valorSessao: 150,
-      observacoes: "Acompanhamento semanal desde março.",
+      prontuario: "Acompanhamento semanal desde março.",
       terapeutaId: terapeuta.id,
     },
   });
@@ -59,7 +59,7 @@ async function main() {
     where: { nome: "Maria Silva" },
     data: {
       email: "maria@exemplo.com",
-      observacoes: "Trabalho voltado a ansiedade e limites no ambiente de trabalho.",
+      prontuario: "Trabalho voltado a ansiedade e limites no ambiente de trabalho.",
     },
   });
 

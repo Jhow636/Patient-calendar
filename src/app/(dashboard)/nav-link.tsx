@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { CalendarDays, Users, Wallet } from "lucide-react";
+import { CalendarDays, Settings, Users, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +27,7 @@ const LINKS_SIDEBAR = [
   { href: "/agenda", label: "Agenda", Icon: CalendarDays },
   { href: "/pacientes", label: "Pacientes", Icon: Users },
   { href: "/financeiro", label: "Financeiro", Icon: Wallet },
+  { href: "/perfil", label: "Perfil", Icon: Settings },
 ];
 
 /* Ícones de navegação da sidebar desktop */

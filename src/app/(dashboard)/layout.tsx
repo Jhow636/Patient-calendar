@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { CalendarDays, LogOut } from "lucide-react";
 import { requireUsuario } from "@/lib/auth-helpers";
+import { prisma } from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
 import { NavLink, SidebarNav } from "./nav-link";
 import { sair } from "./actions";
@@ -18,7 +20,12 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const usuario = await requireUsuario();
+  const sessao = await requireUsuario();
+  const usuario = await prisma.usuario.findUnique({
+    where: { id: sessao.id },
+    select: { nome: true },
+  });
+  const nomeExibido = usuario?.nome ?? sessao.name ?? "";
 
   return (
     <div className="flex min-h-screen">
@@ -62,6 +69,7 @@ export default async function DashboardLayout({
               <NavLink href="/agenda">Agenda</NavLink>
               <NavLink href="/pacientes">Pacientes</NavLink>
               <NavLink href="/financeiro">Financeiro</NavLink>
+              <NavLink href="/perfil">Perfil</NavLink>
             </nav>
           </div>
         </header>
@@ -79,7 +87,12 @@ export default async function DashboardLayout({
               <CalendarDays className="size-4" />
               {dataDeHoje()}
             </span>
-            <span className="text-sm font-medium text-ink">{usuario.name}</span>
+            <Link
+              href="/perfil"
+              className="text-sm font-medium text-ink transition hover:text-primary"
+            >
+              {nomeExibido}
+            </Link>
           </div>
         </div>
 
