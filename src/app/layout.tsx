@@ -19,7 +19,10 @@ export const metadata: Metadata = {
   },
   description: "Agenda de sessões, pacientes e financeiro do consultório.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
+  },
+  openGraph: {
+    images: ["/favicon.png"],
   },
 };
 
