@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         outline:
-          "bg-card text-foreground shadow-[0_2px_12px_-4px_rgba(44,50,84,0.25)] ring-1 ring-foreground/5 hover:text-primary hover:ring-primary/25 aria-expanded:bg-muted aria-expanded:text-foreground",
+          "bg-card text-foreground shadow-[0_2px_12px_-4px_rgba(44,50,84,0.25)] hover:text-primary hover:shadow-[0_4px_16px_-4px_rgba(85,160,94,0.2)] aria-expanded:bg-muted aria-expanded:text-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
