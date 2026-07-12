@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
@@ -29,7 +30,10 @@ export default async function PacientesPage() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/pacientes/novo">Novo paciente</Link>
+          <Link href="/pacientes/novo">
+            <Plus data-icon="inline-start" />
+            Novo paciente
+          </Link>
         </Button>
       </div>
 
@@ -40,7 +44,10 @@ export default async function PacientesPage() {
             Cadastre o primeiro paciente para começar a marcar sessões.
           </p>
           <Button asChild className="mt-4">
-            <Link href="/pacientes/novo">Cadastrar primeiro paciente</Link>
+            <Link href="/pacientes/novo">
+              <Plus data-icon="inline-start" />
+              Cadastrar primeiro paciente
+            </Link>
           </Button>
         </div>
       ) : (
