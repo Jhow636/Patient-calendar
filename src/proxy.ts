@@ -18,5 +18,8 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],
+  // Exclui rotas de autenticação, assets internos e os ícones de metadados
+  // (favicon.ico / icon.png) — senão o middleware redireciona o favicon para
+  // /login e o navegador não consegue carregar o ícone.
+  matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico|icon.png).*)"],
 };
