@@ -30,7 +30,6 @@ model Paciente {
   email        String?
   telefone     String?
   status       String   @default("ATIVO")
-  observacoes  String?
   prontuario   String?
   valorSessao  Float?
   terapeutaId  String

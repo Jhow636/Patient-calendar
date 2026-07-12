@@ -18,11 +18,6 @@ const pacienteSchema = z.object({
     .trim()
     .optional()
     .transform((v) => (v ? v : null)),
-  observacoes: z
-    .string()
-    .trim()
-    .optional()
-    .transform((v) => (v ? v : null)),
   prontuario: z
     .string()
     .trim()
@@ -36,7 +31,6 @@ function lerFormulario(formData: FormData) {
     nome: formData.get("nome"),
     email: formData.get("email"),
     telefone: formData.get("telefone"),
-    observacoes: formData.get("observacoes"),
     prontuario: formData.get("prontuario"),
     valorSessao: formData.get("valorSessao") || null,
   });
