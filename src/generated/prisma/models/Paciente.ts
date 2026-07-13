@@ -20,18 +20,8 @@ export type PacienteModel = runtime.Types.Result.DefaultSelection<Prisma.$Pacien
 
 export type AggregatePaciente = {
   _count: PacienteCountAggregateOutputType | null
-  _avg: PacienteAvgAggregateOutputType | null
-  _sum: PacienteSumAggregateOutputType | null
   _min: PacienteMinAggregateOutputType | null
   _max: PacienteMaxAggregateOutputType | null
-}
-
-export type PacienteAvgAggregateOutputType = {
-  valorSessao: number | null
-}
-
-export type PacienteSumAggregateOutputType = {
-  valorSessao: number | null
 }
 
 export type PacienteMinAggregateOutputType = {
@@ -41,7 +31,6 @@ export type PacienteMinAggregateOutputType = {
   telefone: string | null
   status: string | null
   prontuario: string | null
-  valorSessao: number | null
   terapeutaId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,7 +43,6 @@ export type PacienteMaxAggregateOutputType = {
   telefone: string | null
   status: string | null
   prontuario: string | null
-  valorSessao: number | null
   terapeutaId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -67,21 +55,12 @@ export type PacienteCountAggregateOutputType = {
   telefone: number
   status: number
   prontuario: number
-  valorSessao: number
   terapeutaId: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
-
-export type PacienteAvgAggregateInputType = {
-  valorSessao?: true
-}
-
-export type PacienteSumAggregateInputType = {
-  valorSessao?: true
-}
 
 export type PacienteMinAggregateInputType = {
   id?: true
@@ -90,7 +69,6 @@ export type PacienteMinAggregateInputType = {
   telefone?: true
   status?: true
   prontuario?: true
-  valorSessao?: true
   terapeutaId?: true
   createdAt?: true
   updatedAt?: true
@@ -103,7 +81,6 @@ export type PacienteMaxAggregateInputType = {
   telefone?: true
   status?: true
   prontuario?: true
-  valorSessao?: true
   terapeutaId?: true
   createdAt?: true
   updatedAt?: true
@@ -116,7 +93,6 @@ export type PacienteCountAggregateInputType = {
   telefone?: true
   status?: true
   prontuario?: true
-  valorSessao?: true
   terapeutaId?: true
   createdAt?: true
   updatedAt?: true
@@ -161,18 +137,6 @@ export type PacienteAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: PacienteAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: PacienteSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: PacienteMinAggregateInputType
@@ -203,8 +167,6 @@ export type PacienteGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: PacienteCountAggregateInputType | true
-  _avg?: PacienteAvgAggregateInputType
-  _sum?: PacienteSumAggregateInputType
   _min?: PacienteMinAggregateInputType
   _max?: PacienteMaxAggregateInputType
 }
@@ -216,13 +178,10 @@ export type PacienteGroupByOutputType = {
   telefone: string | null
   status: string
   prontuario: string | null
-  valorSessao: number | null
   terapeutaId: string
   createdAt: Date
   updatedAt: Date
   _count: PacienteCountAggregateOutputType | null
-  _avg: PacienteAvgAggregateOutputType | null
-  _sum: PacienteSumAggregateOutputType | null
   _min: PacienteMinAggregateOutputType | null
   _max: PacienteMaxAggregateOutputType | null
 }
@@ -252,7 +211,6 @@ export type PacienteWhereInput = {
   telefone?: Prisma.StringNullableFilter<"Paciente"> | string | null
   status?: Prisma.StringFilter<"Paciente"> | string
   prontuario?: Prisma.StringNullableFilter<"Paciente"> | string | null
-  valorSessao?: Prisma.FloatNullableFilter<"Paciente"> | number | null
   terapeutaId?: Prisma.StringFilter<"Paciente"> | string
   createdAt?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Paciente"> | Date | string
@@ -267,7 +225,6 @@ export type PacienteOrderByWithRelationInput = {
   telefone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   prontuario?: Prisma.SortOrderInput | Prisma.SortOrder
-  valorSessao?: Prisma.SortOrderInput | Prisma.SortOrder
   terapeutaId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -285,7 +242,6 @@ export type PacienteWhereUniqueInput = Prisma.AtLeast<{
   telefone?: Prisma.StringNullableFilter<"Paciente"> | string | null
   status?: Prisma.StringFilter<"Paciente"> | string
   prontuario?: Prisma.StringNullableFilter<"Paciente"> | string | null
-  valorSessao?: Prisma.FloatNullableFilter<"Paciente"> | number | null
   terapeutaId?: Prisma.StringFilter<"Paciente"> | string
   createdAt?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Paciente"> | Date | string
@@ -300,15 +256,12 @@ export type PacienteOrderByWithAggregationInput = {
   telefone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   prontuario?: Prisma.SortOrderInput | Prisma.SortOrder
-  valorSessao?: Prisma.SortOrderInput | Prisma.SortOrder
   terapeutaId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PacienteCountOrderByAggregateInput
-  _avg?: Prisma.PacienteAvgOrderByAggregateInput
   _max?: Prisma.PacienteMaxOrderByAggregateInput
   _min?: Prisma.PacienteMinOrderByAggregateInput
-  _sum?: Prisma.PacienteSumOrderByAggregateInput
 }
 
 export type PacienteScalarWhereWithAggregatesInput = {
@@ -321,7 +274,6 @@ export type PacienteScalarWhereWithAggregatesInput = {
   telefone?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
   prontuario?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
-  valorSessao?: Prisma.FloatNullableWithAggregatesFilter<"Paciente"> | number | null
   terapeutaId?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Paciente"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Paciente"> | Date | string
@@ -334,7 +286,6 @@ export type PacienteCreateInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   terapeuta: Prisma.UsuarioCreateNestedOneWithoutPacientesInput
@@ -348,7 +299,6 @@ export type PacienteUncheckedCreateInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   terapeutaId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -362,7 +312,6 @@ export type PacienteUpdateInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   terapeuta?: Prisma.UsuarioUpdateOneRequiredWithoutPacientesNestedInput
@@ -376,7 +325,6 @@ export type PacienteUncheckedUpdateInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   terapeutaId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -390,7 +338,6 @@ export type PacienteCreateManyInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   terapeutaId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -403,7 +350,6 @@ export type PacienteUpdateManyMutationInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -415,7 +361,6 @@ export type PacienteUncheckedUpdateManyInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   terapeutaId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -438,14 +383,9 @@ export type PacienteCountOrderByAggregateInput = {
   telefone?: Prisma.SortOrder
   status?: Prisma.SortOrder
   prontuario?: Prisma.SortOrder
-  valorSessao?: Prisma.SortOrder
   terapeutaId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type PacienteAvgOrderByAggregateInput = {
-  valorSessao?: Prisma.SortOrder
 }
 
 export type PacienteMaxOrderByAggregateInput = {
@@ -455,7 +395,6 @@ export type PacienteMaxOrderByAggregateInput = {
   telefone?: Prisma.SortOrder
   status?: Prisma.SortOrder
   prontuario?: Prisma.SortOrder
-  valorSessao?: Prisma.SortOrder
   terapeutaId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -468,14 +407,9 @@ export type PacienteMinOrderByAggregateInput = {
   telefone?: Prisma.SortOrder
   status?: Prisma.SortOrder
   prontuario?: Prisma.SortOrder
-  valorSessao?: Prisma.SortOrder
   terapeutaId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type PacienteSumOrderByAggregateInput = {
-  valorSessao?: Prisma.SortOrder
 }
 
 export type PacienteScalarRelationFilter = {
@@ -525,14 +459,6 @@ export type PacienteUncheckedUpdateManyWithoutTerapeutaNestedInput = {
   deleteMany?: Prisma.PacienteScalarWhereInput | Prisma.PacienteScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type PacienteCreateNestedOneWithoutSessoesInput = {
   create?: Prisma.XOR<Prisma.PacienteCreateWithoutSessoesInput, Prisma.PacienteUncheckedCreateWithoutSessoesInput>
   connectOrCreate?: Prisma.PacienteCreateOrConnectWithoutSessoesInput
@@ -554,7 +480,6 @@ export type PacienteCreateWithoutTerapeutaInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessoes?: Prisma.SessaoCreateNestedManyWithoutPacienteInput
@@ -567,7 +492,6 @@ export type PacienteUncheckedCreateWithoutTerapeutaInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   sessoes?: Prisma.SessaoUncheckedCreateNestedManyWithoutPacienteInput
@@ -609,7 +533,6 @@ export type PacienteScalarWhereInput = {
   telefone?: Prisma.StringNullableFilter<"Paciente"> | string | null
   status?: Prisma.StringFilter<"Paciente"> | string
   prontuario?: Prisma.StringNullableFilter<"Paciente"> | string | null
-  valorSessao?: Prisma.FloatNullableFilter<"Paciente"> | number | null
   terapeutaId?: Prisma.StringFilter<"Paciente"> | string
   createdAt?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Paciente"> | Date | string
@@ -622,7 +545,6 @@ export type PacienteCreateWithoutSessoesInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   terapeuta: Prisma.UsuarioCreateNestedOneWithoutPacientesInput
@@ -635,7 +557,6 @@ export type PacienteUncheckedCreateWithoutSessoesInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   terapeutaId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -664,7 +585,6 @@ export type PacienteUpdateWithoutSessoesInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   terapeuta?: Prisma.UsuarioUpdateOneRequiredWithoutPacientesNestedInput
@@ -677,7 +597,6 @@ export type PacienteUncheckedUpdateWithoutSessoesInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   terapeutaId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -690,7 +609,6 @@ export type PacienteCreateManyTerapeutaInput = {
   telefone?: string | null
   status?: string
   prontuario?: string | null
-  valorSessao?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -702,7 +620,6 @@ export type PacienteUpdateWithoutTerapeutaInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessoes?: Prisma.SessaoUpdateManyWithoutPacienteNestedInput
@@ -715,7 +632,6 @@ export type PacienteUncheckedUpdateWithoutTerapeutaInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessoes?: Prisma.SessaoUncheckedUpdateManyWithoutPacienteNestedInput
@@ -728,7 +644,6 @@ export type PacienteUncheckedUpdateManyWithoutTerapeutaInput = {
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   prontuario?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  valorSessao?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -771,7 +686,6 @@ export type PacienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   telefone?: boolean
   status?: boolean
   prontuario?: boolean
-  valorSessao?: boolean
   terapeutaId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -787,7 +701,6 @@ export type PacienteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   telefone?: boolean
   status?: boolean
   prontuario?: boolean
-  valorSessao?: boolean
   terapeutaId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -801,7 +714,6 @@ export type PacienteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   telefone?: boolean
   status?: boolean
   prontuario?: boolean
-  valorSessao?: boolean
   terapeutaId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -815,13 +727,12 @@ export type PacienteSelectScalar = {
   telefone?: boolean
   status?: boolean
   prontuario?: boolean
-  valorSessao?: boolean
   terapeutaId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PacienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "telefone" | "status" | "prontuario" | "valorSessao" | "terapeutaId" | "createdAt" | "updatedAt", ExtArgs["result"]["paciente"]>
+export type PacienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "telefone" | "status" | "prontuario" | "terapeutaId" | "createdAt" | "updatedAt", ExtArgs["result"]["paciente"]>
 export type PacienteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   terapeuta?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   sessoes?: boolean | Prisma.Paciente$sessoesArgs<ExtArgs>
@@ -847,7 +758,6 @@ export type $PacientePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     telefone: string | null
     status: string
     prontuario: string | null
-    valorSessao: number | null
     terapeutaId: string
     createdAt: Date
     updatedAt: Date
@@ -1282,7 +1192,6 @@ export interface PacienteFieldRefs {
   readonly telefone: Prisma.FieldRef<"Paciente", 'String'>
   readonly status: Prisma.FieldRef<"Paciente", 'String'>
   readonly prontuario: Prisma.FieldRef<"Paciente", 'String'>
-  readonly valorSessao: Prisma.FieldRef<"Paciente", 'Float'>
   readonly terapeutaId: Prisma.FieldRef<"Paciente", 'String'>
   readonly createdAt: Prisma.FieldRef<"Paciente", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Paciente", 'DateTime'>

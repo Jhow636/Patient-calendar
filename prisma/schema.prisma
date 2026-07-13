@@ -31,7 +31,6 @@ model Paciente {
   telefone     String?
   status       String   @default("ATIVO")
   prontuario   String?
-  valorSessao  Float?
   terapeutaId  String
   terapeuta    Usuario  @relation(fields: [terapeutaId], references: [id], onDelete: Cascade)
   sessoes      Sessao[]

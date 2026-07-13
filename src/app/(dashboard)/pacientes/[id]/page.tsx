@@ -119,18 +119,6 @@ export default async function PacienteDetalhePage({
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="valorSessao">Valor da sessão (R$)</Label>
-                <Input
-                  id="valorSessao"
-                  name="valorSessao"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  defaultValue={paciente.valorSessao ?? ""}
-                />
-              </div>
-
-              <div className="space-y-1.5">
                 <Label htmlFor="prontuario">Prontuário</Label>
                 <Textarea
                   id="prontuario"

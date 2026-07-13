@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
 import { statusPacienteInfo } from "@/lib/status-labels";
-import { formatMoeda } from "@/lib/format";
 import type { StatusPaciente } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -65,9 +64,6 @@ export default async function PacientesPage() {
                   <p className="truncate text-sm text-ink-soft">
                     {[
                       [paciente.email, paciente.telefone].filter(Boolean).join(" / "),
-                      paciente.valorSessao != null
-                        ? formatMoeda(paciente.valorSessao)
-                        : null,
                       `${paciente._count.sessoes} ${
                         paciente._count.sessoes === 1 ? "sessão" : "sessões"
                       }`,

@@ -23,7 +23,6 @@ const pacienteSchema = z.object({
     .trim()
     .optional()
     .transform((v) => (v ? v : null)),
-  valorSessao: z.coerce.number().nonnegative().optional().nullable(),
 });
 
 function lerFormulario(formData: FormData) {
@@ -32,7 +31,6 @@ function lerFormulario(formData: FormData) {
     email: formData.get("email"),
     telefone: formData.get("telefone"),
     prontuario: formData.get("prontuario"),
-    valorSessao: formData.get("valorSessao") || null,
   });
 }
 

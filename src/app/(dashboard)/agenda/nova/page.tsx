@@ -106,7 +106,7 @@ export default async function NovaSessaoPage({
                   type="number"
                   step="0.01"
                   min="0"
-                  placeholder="Deixe em branco para usar o valor padrão do paciente"
+                  placeholder="Ex: 150,00"
                 />
               </div>
 

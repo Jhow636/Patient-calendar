@@ -45,7 +45,7 @@ export async function criarSessao(formData: FormData) {
   });
 
   const paciente = await exigirPaciente(dados.pacienteId, usuario.id);
-  const valor = dados.valor ?? paciente.valorSessao ?? 0;
+  const valor = dados.valor ?? 0;
 
   const [ano, mes, dia] = dados.data.split("-").map(Number);
   const [horaH, horaM] = dados.hora.split(":").map(Number);

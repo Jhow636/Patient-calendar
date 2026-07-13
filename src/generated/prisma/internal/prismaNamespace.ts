@@ -837,7 +837,6 @@ export const PacienteScalarFieldEnum = {
   telefone: 'telefone',
   status: 'status',
   prontuario: 'prontuario',
-  valorSessao: 'valorSessao',
   terapeutaId: 'terapeutaId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
