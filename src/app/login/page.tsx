@@ -21,7 +21,7 @@ export default async function LoginPage({
           <p className="text-xs font-medium uppercase tracking-wider text-primary">
             Consultório
           </p>
-          <h1 className="mt-1 text-2xl font-semibold text-ink">Everton Dutra</h1>
+          <h1 className="mt-1 text-2xl font-semibold text-ink">PsiAgenda</h1>
           <p className="mt-1 text-sm text-ink-soft">Entre para acessar sua agenda</p>
         </div>
 

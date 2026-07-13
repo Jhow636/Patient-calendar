@@ -57,7 +57,7 @@ export default async function DashboardLayout({
                 <p className="text-xs font-medium uppercase tracking-wider text-primary">
                   Consultório
                 </p>
-                <p className="text-sm font-semibold text-ink">Everton Dutra</p>
+                <p className="text-sm font-semibold text-ink">PsiAgenda</p>
               </div>
               <form action={sair}>
                 <Button type="submit" variant="outline" size="sm">
@@ -80,7 +80,7 @@ export default async function DashboardLayout({
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">
               Consultório
             </p>
-            <p className="text-lg font-bold text-ink">Everton Dutra</p>
+            <p className="text-lg font-bold text-ink">PsiAgenda</p>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 text-sm text-ink-soft">

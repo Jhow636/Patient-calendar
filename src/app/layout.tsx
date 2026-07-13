@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "PsiAgenda | Everton Dutra",
-    template: "%s | Everton Dutra",
+    default: "PsiAgenda",
+    template: "%s | PsiAgenda",
   },
   description: "Agenda de sessões, pacientes e financeiro do consultório.",
 };
