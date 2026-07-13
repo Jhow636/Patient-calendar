@@ -9,8 +9,13 @@ import { StatusChip } from "@/components/status-chip";
 import { statusPacienteInfo, statusSessaoInfo, statusPagamentoInfo } from "@/lib/status-labels";
 import { formatDataHora } from "@/lib/date";
 import type { StatusPaciente, StatusSessao, StatusPagamento } from "@/lib/types";
-import { atualizarPaciente, alternarStatusPaciente } from "@/lib/actions/pacientes";
+import {
+  atualizarPaciente,
+  alternarStatusPaciente,
+  excluirPaciente,
+} from "@/lib/actions/pacientes";
 import { SubmitButton } from "@/components/submit-button";
+import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -42,6 +47,7 @@ export default async function PacienteDetalhePage({
   const status = statusPacienteInfo(paciente.status as StatusPaciente);
   const atualizarComId = atualizarPaciente.bind(null, paciente.id);
   const alternarStatus = alternarStatusPaciente.bind(null, paciente.id, paciente.status);
+  const excluirComId = excluirPaciente.bind(null, paciente.id);
 
   return (
     <div className="space-y-8">
@@ -191,6 +197,18 @@ export default async function PacienteDetalhePage({
             </Card>
           )}
         </div>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6">
+        <p className="text-sm text-ink-soft">
+          Excluir remove o paciente e todo o histórico de sessões, notas e
+          pagamentos. Essa ação não pode ser desfeita.
+        </p>
+        <form action={excluirComId}>
+          <ConfirmSubmitButton confirmMessage={`Excluir ${paciente.nome} e todo o histórico? Essa ação não pode ser desfeita.`}>
+            Excluir paciente
+          </ConfirmSubmitButton>
+        </form>
       </div>
     </div>
   );

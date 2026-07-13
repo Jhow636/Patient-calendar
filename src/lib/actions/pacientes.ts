@@ -72,3 +72,16 @@ export async function alternarStatusPaciente(id: string, statusAtual: string) {
   revalidatePath("/pacientes");
   revalidatePath(`/pacientes/${id}`);
 }
+
+export async function excluirPaciente(id: string) {
+  const usuario = await requireUsuario();
+
+  // Remove apenas se o paciente pertencer ao terapeuta logado.
+  // As sessões, notas e pagamentos são apagados em cascata (schema).
+  await prisma.paciente.deleteMany({
+    where: { id, terapeutaId: usuario.id },
+  });
+
+  revalidatePath("/pacientes");
+  redirect("/pacientes");
+}
