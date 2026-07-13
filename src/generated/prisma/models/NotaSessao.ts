@@ -1110,6 +1110,7 @@ export type NotaSessaoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many NotaSessaos.
    */
   data: Prisma.NotaSessaoCreateManyInput | Prisma.NotaSessaoCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1128,6 +1129,7 @@ export type NotaSessaoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many NotaSessaos.
    */
   data: Prisma.NotaSessaoCreateManyInput | Prisma.NotaSessaoCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

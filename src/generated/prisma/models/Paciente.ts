@@ -580,6 +580,7 @@ export type PacienteCreateOrConnectWithoutTerapeutaInput = {
 
 export type PacienteCreateManyTerapeutaInputEnvelope = {
   data: Prisma.PacienteCreateManyTerapeutaInput | Prisma.PacienteCreateManyTerapeutaInput[]
+  skipDuplicates?: boolean
 }
 
 export type PacienteUpsertWithWhereUniqueWithoutTerapeutaInput = {
@@ -1519,6 +1520,7 @@ export type PacienteCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Pacientes.
    */
   data: Prisma.PacienteCreateManyInput | Prisma.PacienteCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1537,6 +1539,7 @@ export type PacienteCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many Pacientes.
    */
   data: Prisma.PacienteCreateManyInput | Prisma.PacienteCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

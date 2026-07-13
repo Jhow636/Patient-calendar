@@ -1198,6 +1198,7 @@ export type PagamentoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many Pagamentos.
    */
   data: Prisma.PagamentoCreateManyInput | Prisma.PagamentoCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1216,6 +1217,7 @@ export type PagamentoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many Pagamentos.
    */
   data: Prisma.PagamentoCreateManyInput | Prisma.PagamentoCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

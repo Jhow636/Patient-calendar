@@ -7,12 +7,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
-// SQLite não suporta enums nativos, então os campos de status usam
-// String e as opções válidas são controladas pelo TypeScript (src/lib/types.ts).
-// Ao migrar para Postgres (Neon) no deploy, essas colunas podem virar enums de verdade.
+// Os campos de status usam String e as opções válidas são controladas
+// pelo TypeScript (src/lib/types.ts).
 
 model Usuario {
   id        String   @id @default(cuid())

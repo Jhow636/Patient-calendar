@@ -455,6 +455,7 @@ export type SessaoCreateOrConnectWithoutPacienteInput = {
 
 export type SessaoCreateManyPacienteInputEnvelope = {
   data: Prisma.SessaoCreateManyPacienteInput | Prisma.SessaoCreateManyPacienteInput[]
+  skipDuplicates?: boolean
 }
 
 export type SessaoUpsertWithWhereUniqueWithoutPacienteInput = {
@@ -1369,6 +1370,7 @@ export type SessaoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * The data used to create many Sessaos.
    */
   data: Prisma.SessaoCreateManyInput | Prisma.SessaoCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1387,6 +1389,7 @@ export type SessaoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many Sessaos.
    */
   data: Prisma.SessaoCreateManyInput | Prisma.SessaoCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
