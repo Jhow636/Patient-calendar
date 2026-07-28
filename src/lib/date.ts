@@ -9,6 +9,7 @@ import {
   startOfWeek,
 } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import type { Recorrencia } from "@/lib/types";
 
 export function formatDataHora(data: Date) {
   const texto = format(data, "EEE, d 'de' MMM 'às' HH:mm", { locale: ptBR });
@@ -86,4 +87,25 @@ export function parseMesParam(valor: string | undefined): Date {
 
 export function formatDataCurta(data: Date) {
   return format(data, "d 'de' MMM", { locale: ptBR });
+}
+
+/** Monta um Date no fuso local a partir dos campos <input type="date"> e <input type="time">. */
+export function combinarDataHora(data: string, hora: string) {
+  const [ano, mes, dia] = data.split("-").map(Number);
+  const [horas, minutos] = hora.split(":").map(Number);
+  return new Date(ano, mes - 1, dia, horas, minutos);
+}
+
+/** Data da ocorrência `indice` (0 = a primeira) de uma série recorrente. */
+export function ocorrenciaRecorrente(base: Date, recorrencia: Recorrencia, indice: number) {
+  switch (recorrencia) {
+    case "SEMANAL":
+      return addWeeks(base, indice);
+    case "QUINZENAL":
+      return addWeeks(base, indice * 2);
+    case "MENSAL":
+      return addMonths(base, indice);
+    case "NENHUMA":
+      return base;
+  }
 }

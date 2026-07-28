@@ -5,17 +5,26 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
-import { formatDataParam, inicioSemana } from "@/lib/date";
-import { STATUS_SESSAO, type StatusSessao } from "@/lib/types";
-
-const OCORRENCIAS_RECORRENCIA = 12;
+import {
+  combinarDataHora,
+  formatDataParam,
+  inicioSemana,
+  ocorrenciaRecorrente,
+} from "@/lib/date";
+import { RECORRENCIA, STATUS_SESSAO, type StatusSessao } from "@/lib/types";
 
 const sessaoSchema = z.object({
   pacienteId: z.string().min(1, "Selecione um paciente"),
   data: z.string().min(1, "Informe a data"),
   hora: z.string().min(1, "Informe o horário"),
-  recorrencia: z.enum(["NENHUMA", "SEMANAL"]),
+  recorrencia: z.enum(RECORRENCIA),
+  repeticoes: z.coerce.number().int().min(1).max(52).catch(12),
   valor: z.coerce.number().nonnegative().optional().nullable(),
+});
+
+const remarcarSchema = z.object({
+  data: z.string().min(1, "Informe a data"),
+  hora: z.string().min(1, "Informe o horário"),
 });
 
 async function exigirPaciente(pacienteId: string, usuarioId: string) {
@@ -41,32 +50,27 @@ export async function criarSessao(formData: FormData) {
     data: formData.get("data"),
     hora: formData.get("hora"),
     recorrencia: formData.get("recorrencia") || "NENHUMA",
+    repeticoes: formData.get("repeticoes"),
     valor: formData.get("valor") || null,
   });
 
   const paciente = await exigirPaciente(dados.pacienteId, usuario.id);
   const valor = dados.valor ?? 0;
 
-  const [ano, mes, dia] = dados.data.split("-").map(Number);
-  const [horaH, horaM] = dados.hora.split(":").map(Number);
-  const primeiraData = new Date(ano, mes - 1, dia, horaH, horaM);
-
-  const totalOcorrencias = dados.recorrencia === "SEMANAL" ? OCORRENCIAS_RECORRENCIA : 1;
+  const primeiraData = combinarDataHora(dados.data, dados.hora);
+  const totalOcorrencias = dados.recorrencia === "NENHUMA" ? 1 : dados.repeticoes;
 
   await prisma.$transaction(
-    Array.from({ length: totalOcorrencias }, (_, i) => {
-      const dataHora = new Date(primeiraData);
-      dataHora.setDate(dataHora.getDate() + i * 7);
-
-      return prisma.sessao.create({
+    Array.from({ length: totalOcorrencias }, (_, i) =>
+      prisma.sessao.create({
         data: {
           pacienteId: paciente.id,
-          dataHora,
+          dataHora: ocorrenciaRecorrente(primeiraData, dados.recorrencia, i),
           recorrencia: dados.recorrencia,
           pagamento: { create: { valor } },
         },
-      });
-    })
+      })
+    )
   );
 
   revalidatePath("/agenda");
@@ -85,6 +89,28 @@ export async function atualizarStatusSessao(id: string, status: string) {
   await prisma.sessao.update({
     where: { id: sessao.id },
     data: { status },
+  });
+
+  revalidatePath("/agenda");
+  revalidatePath(`/agenda/${id}`);
+  revalidatePath(`/pacientes/${sessao.pacienteId}`);
+}
+
+export async function remarcarSessao(id: string, formData: FormData) {
+  const usuario = await requireUsuario();
+  const sessao = await exigirSessao(id, usuario.id);
+  const dados = remarcarSchema.parse({
+    data: formData.get("data"),
+    hora: formData.get("hora"),
+  });
+
+  await prisma.sessao.update({
+    where: { id: sessao.id },
+    data: {
+      dataHora: combinarDataHora(dados.data, dados.hora),
+      // Remarcar uma sessão cancelada volta a agendá-la.
+      ...(sessao.status === "CANCELADA" ? { status: "AGENDADA" } : {}),
+    },
   });
 
   revalidatePath("/agenda");

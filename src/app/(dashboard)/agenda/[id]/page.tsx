@@ -8,14 +8,13 @@ import { requireUsuario } from "@/lib/auth-helpers";
 import { StatusChip } from "@/components/status-chip";
 import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
 import { statusSessaoInfo, statusPagamentoInfo } from "@/lib/status-labels";
-import { formatDataHora } from "@/lib/date";
+import { formatDataHora, formatDataParam, formatHora } from "@/lib/date";
 import type { StatusSessao, StatusPagamento } from "@/lib/types";
-import { atualizarStatusSessao, excluirSessao } from "@/lib/actions/sessoes";
+import { atualizarStatusSessao, excluirSessao, remarcarSessao } from "@/lib/actions/sessoes";
 import { salvarNota } from "@/lib/actions/notas";
 import { alternarStatusPagamento, atualizarValorPagamento } from "@/lib/actions/pagamentos";
 import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
-import { Button as LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -50,6 +49,7 @@ export default async function SessaoDetalhePage({
     : null;
 
   const salvarNotaComId = salvarNota.bind(null, sessao.id);
+  const remarcarComId = remarcarSessao.bind(null, sessao.id);
   const excluirComId = excluirSessao.bind(null, sessao.id);
   const alternarPagamentoComId = sessao.pagamento
     ? alternarStatusPagamento.bind(null, sessao.id, sessao.pagamento.status)
@@ -121,6 +121,50 @@ export default async function SessaoDetalhePage({
               );
             })}
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+            Remarcar
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form action={remarcarComId} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="data">Nova data</Label>
+                <Input
+                  id="data"
+                  name="data"
+                  type="date"
+                  required
+                  defaultValue={formatDataParam(sessao.dataHora)}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="hora">Novo horário</Label>
+                <Input
+                  id="hora"
+                  name="hora"
+                  type="time"
+                  required
+                  defaultValue={formatHora(sessao.dataHora)}
+                />
+              </div>
+            </div>
+
+            {sessao.status === "CANCELADA" && (
+              <p className="text-xs text-ink-soft">
+                Ao remarcar, esta sessão volta para o status Agendada.
+              </p>
+            )}
+
+            <SubmitButton pendingText="Remarcando…" size="default">
+              Remarcar sessão
+            </SubmitButton>
+          </form>
         </CardContent>
       </Card>
 

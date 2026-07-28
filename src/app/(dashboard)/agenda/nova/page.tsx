@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { requireUsuario } from "@/lib/auth-helpers";
 import { criarSessao } from "@/lib/actions/sessoes";
 import { formatDataParam } from "@/lib/date";
+import { CamposRecorrencia } from "./campos-recorrencia";
 import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -85,18 +86,7 @@ export default async function NovaSessaoPage({
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="recorrencia">Recorrência</Label>
-                <Select name="recorrencia" defaultValue="NENHUMA">
-                  <SelectTrigger id="recorrencia" className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="NENHUMA">Única</SelectItem>
-                    <SelectItem value="SEMANAL">Semanal (12 sessões)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <CamposRecorrencia />
 
               <div className="space-y-1.5">
                 <Label htmlFor="valor">Valor da sessão (R$)</Label>
