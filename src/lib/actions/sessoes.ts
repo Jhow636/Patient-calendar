@@ -60,18 +60,22 @@ export async function criarSessao(formData: FormData) {
   const primeiraData = combinarDataHora(dados.data, dados.hora);
   const totalOcorrencias = dados.recorrencia === "NENHUMA" ? 1 : dados.repeticoes;
 
-  await prisma.$transaction(
-    Array.from({ length: totalOcorrencias }, (_, i) =>
-      prisma.sessao.create({
-        data: {
-          pacienteId: paciente.id,
-          dataHora: ocorrenciaRecorrente(primeiraData, dados.recorrencia, i),
-          recorrencia: dados.recorrencia,
-          pagamento: { create: { valor } },
-        },
-      })
-    )
-  );
+  // Criar em lote: uma sessão por vez estourava o timeout da transação
+  // quando a recorrência tinha muitas ocorrências.
+  await prisma.$transaction(async (tx) => {
+    const sessoes = await tx.sessao.createManyAndReturn({
+      data: Array.from({ length: totalOcorrencias }, (_, i) => ({
+        pacienteId: paciente.id,
+        dataHora: ocorrenciaRecorrente(primeiraData, dados.recorrencia, i),
+        recorrencia: dados.recorrencia,
+      })),
+      select: { id: true },
+    });
+
+    await tx.pagamento.createMany({
+      data: sessoes.map((sessao) => ({ sessaoId: sessao.id, valor })),
+    });
+  });
 
   revalidatePath("/agenda");
   revalidatePath(`/pacientes/${paciente.id}`);
